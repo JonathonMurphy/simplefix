@@ -93,3 +93,9 @@ venv*/
 
 # PyCharm project settings
 .idea
+
+# Node
+simplefix-node/test*.*
+simplefix-node/node_modules
+
+simplefix/test*.*
