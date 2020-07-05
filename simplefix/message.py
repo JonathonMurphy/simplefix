@@ -39,16 +39,16 @@ import sys
 import time
 import warnings
 
-from .constants import SOH_STR
+from constants import SOH_STR
 
 
 def fix_val(value):
     """Make a FIX value from a string, bytes, or number."""
-    if type(value) is bytes:
-        return value
-
     if sys.version_info[0] == 2:
         return bytes(value)
+
+    if type(value) is bytes:
+        return value
 
     if type(value) is str:
         return bytes(value, 'UTF-8')

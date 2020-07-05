@@ -22,3 +22,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 *******************************************************************/
+// const FixMessage = require("./message.js");
+const FixParser = require("./parser.js");
+const constants = require("./constants.js");
+
+module.exports = {
+  test: "this is a test",
+
+  pretty_print: function() {
+    /*
+    Right now this is just a placeholder
+    Pretty-print a raw FIX buffer.
+
+    :param buf: Byte sequence containing raw message.
+    :param sep: Separator character to use for output, default is '|'.
+    :returns: Formatted byte array.
+    */
+
+    let text = "this is a test of a function";
+    return text;
+  },
+
+  constants: constants,
+  FixParser: FixParser.FixParser()
+
+}

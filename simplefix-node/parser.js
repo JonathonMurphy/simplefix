@@ -22,3 +22,54 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 *******************************************************************/
+
+const constants = require("./constants.js");
+const data = require("./data.js")
+const default_stop_tag = 10;
+
+module.exports = {
+
+  FixParser: class {
+    /*
+    FIX protocol message parser.
+
+    This class translates FIX application messages in raw (wire)
+    format into instance of the FixMessage class.
+
+    It does not perform any validation of the fields, their presence
+    or absence in a particular message, the data types of fields, or
+    the values of enumerations.
+
+    It is suitable for streaming processing, accumulating byte data
+    from a network connection, and returning complete messages as they
+    are delivered, potentially in multiple fragments
+    */
+
+    constructor(this) {
+
+      // Parsed "tag=value" pairs, removed from the buffer, but not
+      // yet returned as a message.
+      this.pairs = [];
+
+      // Copy raw field length tags.
+      this.raw_len_tags = data.RAW_LEN_TAGS();
+
+      // Copy raw field data tags.
+      this.raw_data_tags = data.RAW_DATA_TAGS();
+
+      // Parsed length of data field.
+      this.raw_len = 0;
+
+      // Stop tag (default).
+      this.stop_tag = default_stop_tag;
+
+      // Stop character (optional).
+      this.stop_char = null;
+
+    } // End of constructor
+
+    
+
+  } // End of FixParser class
+
+} // End of module.exports
