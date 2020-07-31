@@ -28,6 +28,7 @@ SOFTWARE.
 module.exports = {
   // Control character
   startOfHeaderString: Buffer.from('\x01', 'utf8'),
+  equalsByte: Buffer.from('=', 'utf8'),
 
   // Tag 1
   tag_account: '1',

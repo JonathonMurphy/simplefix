@@ -25,7 +25,7 @@ SOFTWARE.
 
 module.exports = {
   // Raw data fields, as defined in FIX.5.0sp2 ep228.
-  raw_data: [
+  rawData: [
       [90, 91],        // SecureData
       [93, 89],        // Signature
       [95, 96],        // RawData
@@ -96,7 +96,7 @@ module.exports = {
     ],
 
   // Collection of tag numbers representing raw data fields.
-  raw_data_tags() {
+  rawDataTags() {
     let array = [];
     let item;
     for (item of this.raw_data) {
@@ -106,7 +106,7 @@ module.exports = {
   },
 
   // Collection of tag numbers representing raw data length fields.
-  raw_len_tags() {
+  rawLenTags() {
     let array = [];
     let item;
     for (item of this.raw_data) {

@@ -99,16 +99,16 @@ module.exports = {
       }
 
       if (tag == 8 || parseInt(tag) == 8) {
-        this.begin_string = module.exports.convertToString(value)
+        this.beginString = module.exports.convertToString(value)
       }
 
       if (tag == 35 || parseInt(tag) == 35) {
-        this.message_type = module.exports.convertToString(value)
+        this.messageType = module.exports.convertToString(value)
       }
 
       if (header) {
-        this.pairs.splice(this.header_index, 0, [module.exports.convertToString(tag), module.exports.convertToString(value)])
-        this.header_index++;
+        this.pairs.splice(this.headerIndex, 0, [module.exports.convertToString(tag), module.exports.convertToString(value)])
+        this.headerIndex++;
       } else {
         this.pairs.push([module.exports.convertToString(tag), module.exports.convertToString(value)])
       }
@@ -264,7 +264,7 @@ module.exports = {
       return null
     }
 
-    encode(raw=false) { // TODO
+    encode(raw=false) { // DONE
       /*
       Convert message to on-the-wire FIX format.
 
@@ -293,7 +293,7 @@ module.exports = {
 
       // Cooked
       for (let tagValuePair of this.pairs) {
-        if (importantTags.includes(tagValuePair[0]) === false) {
+        if (importantTags.includes(tagValuePair[0]) === true) {
           string += tagValuePair[0] + '=' + tagValuePair[1] + startOfHeaderString;
         }
       }
@@ -303,7 +303,7 @@ module.exports = {
         console.error("No message type set")
       }
 
-      string = tagValuePair[0] + '=' + tagValuePair[1] + startOfHeaderString + string;
+      string = '35=' + this.messageType + startOfHeaderString + string;
 
       // Calculate body length.
       //
@@ -322,10 +322,12 @@ module.exports = {
 
       // Calculate and append the checksum
       let checksum = 0;
-      for (let char of string.toArray()) {
-        
+      for (let character of string.split('')) {
+        // console.log(character)
+        checksum += character.charCodeAt(0);
       }
 
+      string += "10=" + module.exports.convertToString(checksum % 256) + startOfHeaderString;
 
       return Buffer.from(string);
 
