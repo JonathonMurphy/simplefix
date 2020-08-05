@@ -227,7 +227,7 @@ class FixParser(object):  # skipcq: PYL-R0205
             return None
 
         # Look for checksum.
-        if self.stop_tag is not None:
+        if self.stop_tag is not None: # Working from here
             if self.pairs[-1][0] != self.stop_tag:
                 return None
 
